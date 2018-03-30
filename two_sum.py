@@ -11,6 +11,12 @@ return [0, 1].
 """
 
 class Solution:
+
+    """
+	52ms
+	>71.78
+	https://leetcode.com/submissions/detail/147674150/
+    """
     def twoSum_v1(self, nums, target):
         """
         :type nums: List[int]
@@ -27,7 +33,7 @@ class Solution:
         second_part_num = None
         for i, num in enumerate(nums):
             left_value = target - num
-            for num2 in nums[i:]:
+            for num2 in nums[i + 1:]:
                 if num2 == left_value:
                     second_part_num = num2
                     first_part_num = num
@@ -49,5 +55,52 @@ class Solution:
 
         return result
 
-if __name__ == 'main':
-	twoSum_v1([-1, -2, 0, 4], 4)
+    """
+	3580ms
+	>23.36
+	https://leetcode.com/submissions/detail/147673640/
+    """
+    def twoSum_v2(self, nums, target):
+        for i, num in enumerate(nums):
+            left_value = target - num
+            for j, num2 in enumerate(nums[i + 1:]):
+                if num2 == left_value:
+                    return [i, j + i + 1]
+
+
+    """
+	48ms
+	>74.71
+	https://leetcode.com/submissions/detail/147681286/
+    """
+    def twoSum_v3(self, nums, target):
+          def _filter_num(x):
+              if reverse:
+                  return x >= target
+              else:
+                  return x < target
+
+          num_dict = {}
+          for i, num in enumerate(nums):
+              if num_dict.get(num):
+                  num_dict[num].append(i)
+              else:
+                  num_dict[num] = [i]
+
+          reverse = 0 >= target
+          nums = list(filter(_filter_num, nums))
+          nums.sort(reverse=reverse)
+
+          for num in nums:
+              left_value = target - num
+              if num_dict.get(left_value):
+                  if left_value == num:
+                      return num_dict[num][:2]
+                  else:
+                      num_dict[num].extend(num_dict[left_value])
+                      return num_dict[num]
+
+
+if __name__ == '__main__':
+    solution = Solution()
+    print(solution.twoSum_v3([3,3], 6))
