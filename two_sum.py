@@ -100,7 +100,30 @@ class Solution:
                       num_dict[num].extend(num_dict[left_value])
                       return num_dict[num]
 
+    """
+	44ms
+	>88.60
+	https://leetcode.com/submissions/detail/147687006/
+    """
+    def twoSum_v4(self, nums, target):
+        num_dict = {}
+        for i, num in enumerate(nums):
+            if num_dict.get(num):
+                num_dict[num].append(i)
+            else:
+                num_dict[num] = [i]
+        for num in nums:
+             left_value = target - num
+             if not num_dict.get(left_value):
+                 continue
+             if left_value == num and len(num_dict[num]) > 1:
+                return num_dict[num][:2]
+             elif left_value == num and len(num_dict[num]) == 1:
+                    continue
+             else:
+                num_dict[num].extend(num_dict[left_value])
+                return num_dict[num]
 
 if __name__ == '__main__':
     solution = Solution()
-    print(solution.twoSum_v3([3,3], 6))
+    print(solution.twoSum_v4([2,5,5,11], 10))
