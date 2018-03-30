@@ -124,6 +124,32 @@ class Solution:
                 num_dict[num].extend(num_dict[left_value])
                 return num_dict[num]
 
+    """
+	48ms
+	>74.71
+	https://leetcode.com/submissions/detail/147688508/
+    """
+    def twoSum_v5(self, nums, target):
+        num_dict = {}
+        for i, num in enumerate(nums):
+            if target - num in num_dict:
+                return [i, num_dict[target-num]]
+            else:
+                num_dict[num] = i
+
+    """
+	36ms
+	>99.95
+	https://leetcode.com/submissions/detail/147688618/
+    """
+    def twoSum_v6(self, nums, target):
+        num_dict = {}
+        for i in range(len(nums)):
+            if target - nums[i] in num_dict:
+                return [i, num_dict[target-nums[i]]]
+            else:
+                num_dict[nums[i]] = i
+
 if __name__ == '__main__':
     solution = Solution()
-    print(solution.twoSum_v4([2,5,5,11], 10))
+    print(solution.twoSum_v6([2,5,5,11], 10))
