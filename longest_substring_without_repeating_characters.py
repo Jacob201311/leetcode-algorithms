@@ -55,7 +55,46 @@ class Solution:
         else:
             return result[0] if result[0] > len(sub_str) else len(sub_str)
 
+    """
+        !!!recursion too deep
+    """
+    def __init__(self):
+        self.long_len = 0
+
+    def lengthOfLongestSubstring_v2(self, s):
+        if(len(s) <= self.long_len):
+            return self.long_len
+        if(len(s) == 1):
+            return 1
+
+        for i in range(1, len(s)):
+            if s[i] not in s[:i]:
+                self.long_len = i + 1
+                if self.long_len == len(s):
+                    return self.lengthOfLongestSubstring_v2(s)
+            else:
+                self.long_len = i if i > self.long_len else self.long_len
+                return self.lengthOfLongestSubstring_v2(s[s.find(s[i]) + 1:])
+
+
+    def lengthOfLongestSubstring_v3(self, s):
+        long_len = 0
+        char_index_dict = {}
+        for i in range(len(s)):
+            if char_index_dict.get(s[i]) != None:
+                if long_len < len(char_index_dict):
+                    long_len = len(char_index_dict)
+                for abandon_str in s[:char_index_dict[s[i]] + 1]:
+                    if char_index_dict.get(abandon_str) != None and char_index_dict.get(abandon_str) < char_index_dict[s[i]]:
+                        char_index_dict.pop(abandon_str)
+
+            char_index_dict[s[i]] = i
+
+
+        return len(char_index_dict) if len(char_index_dict) > long_len else long_len
+
+
 if __name__ == "__main__":
     solution =  Solution()
-    print(solution.lengthOfLongestSubstring_v1("bpfbhmipx"))
+    print(solution.lengthOfLongestSubstring_v3("bpfbhmipx"))
 
