@@ -77,6 +77,9 @@ class Solution:
                 return self.lengthOfLongestSubstring_v2(s[s.find(s[i]) + 1:])
 
 
+    """
+       !!!Time Limit Exceeded
+    """
     def lengthOfLongestSubstring_v3(self, s):
         long_len = 0
         char_index_dict = {}
