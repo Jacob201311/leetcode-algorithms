@@ -31,6 +31,7 @@ class Solution:
     """
         cost: 80ms >99.6
         memory: 12.9MB <100
+        https://leetcode.com/submissions/detail/208006984/
     """
     def mergeTrees(self, t1: 'TreeNode', t2: 'TreeNode') -> 'TreeNode':
         if not t1 or not t2:
