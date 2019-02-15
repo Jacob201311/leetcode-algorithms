@@ -22,28 +22,24 @@ Note: The merging process must start from the root nodes of both trees.
 """
 class TreeNode:
     def __init__(self, value, left_node, right_node):
-        self.value = value
-        self.left_node = left_node
-        self.right_node = right_node
+        self.val = value
+        self.left = left_node
+        self.right = right_node
 
 
 class Solution:
-    def mergeTrees(self, t1, t2):
-        """
-        :type t1: TreeNode
-        :type t2: TreeNode
-        :rtype: TreeNode
-        """
-        if t1 and not t2:
-            return t1
-        elif not t1 and t2:
-            return t2
-        elif not t1 and not t2:
-            return None
-        else:
-            t1.value += t2.valu
-            mergeTrees(t1.left_node, t2.left_node)
-            mergeTrees(t1.right_node, t2.right_node)
+    """
+        cost: 80ms >99.6
+        memory: 12.9MB <100
+    """
+    def mergeTrees(self, t1: 'TreeNode', t2: 'TreeNode') -> 'TreeNode':
+        if not t1 or not t2:
+            return t1 if t1 else t2
+
+        t1.val += t2.val
+        t1.left = self.mergeTrees(t1.left, t2.left)
+        t1.right = self.mergeTrees(t1.right, t2.right)
+        return t1
 
 
 
