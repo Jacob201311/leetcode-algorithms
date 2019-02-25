@@ -25,6 +25,11 @@ Return:
 """
 
 class Solution:
+
+    """
+        cost: 60ms >60.01
+        https://leetcode.com/submissions/detail/210561286/
+    """
     def pathSum(self, root: TreeNode, s: int) -> List[List[int]]:
         if not root:
             return []
