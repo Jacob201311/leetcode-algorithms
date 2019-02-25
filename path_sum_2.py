@@ -40,7 +40,7 @@ class Solution:
 
     def collect(self, root: TreeNode):
         if not root:
-            return [[]]
+            return []
 
         if not root.left and not root.right:
             return [[root.val]]
