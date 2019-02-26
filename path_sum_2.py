@@ -63,3 +63,42 @@ class Solution:
                 inRightResult.append(root.val)
 
         return leftResult + rightResult
+
+
+class Solution2:
+
+    """
+        cost: 56ms >83.14
+        https://leetcode.com/submissions/detail/210670524/
+    """
+    def pathSum(self, root: TreeNode, s: int) -> List[List[int]]:
+        resultList = self.collect(root, s)
+        print(resultList)
+        for result in resultList:
+            result.reverse()
+
+        return resultList
+
+
+    def collect(self, root: TreeNode, s: int):
+        if not root:
+            return []
+
+        if not root.left and not root.right:
+            if s - root.val == 0:
+                return [[root.val]]
+            else:
+                return []
+
+        leftResult = self.collect(root.left, s-root.val)
+
+        if leftResult:
+            for inLeftResult in leftResult:
+                inLeftResult.append(root.val)
+
+        rightResult = self.collect(root.right, s-root.val)
+        if rightResult:
+            for inRightResult in rightResult:
+                inRightResult.append(root.val)
+
+        return leftResult + rightResult
