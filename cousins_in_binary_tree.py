@@ -55,10 +55,9 @@ class Solution:
         https://leetcode.com/submissions/detail/211066622/
     """
     def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
-        fakeRoot = TreeNode(0)
-        fakeRoot.left = root
-
-        self.getParent(fakeRoot, x, y, 0)
+        if root.val == x or root.val == y:
+            return False
+        self.getParent(root, x, y, 0)
 
         if self.d[0] - self.d[1] == 0 and self.p[0] - self.p[1] != 0:
             return True
