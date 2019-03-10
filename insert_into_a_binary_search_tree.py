@@ -33,11 +33,10 @@ This tree is also valid:
 class Solution:
 
     """
-        cost: 136ms >34.77
+        cost: 132ms >42.15
         https://leetcode.com/submissions/detail/213754770/
     """
     def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
-        self.origin = root
         self.last = None
         self.change = False
 
@@ -62,4 +61,4 @@ class Solution:
         helper(root)
         if not self.change and self.last:
             self.last.right = TreeNode(val)
-        return self.origin
+        return root
