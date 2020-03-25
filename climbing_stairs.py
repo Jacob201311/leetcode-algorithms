@@ -44,3 +44,18 @@ class Solution:
         result = self.climbStairs(n - 1) + self.climbStairs(n-2)
         self.resultDict[n] = result
         return result
+
+    """
+	use dp
+    """
+    def climbStairs(self, n: int) -> int:
+        # f(n) = f(n-1) + f(n-2)
+        if n == 1:
+            return 1;
+
+        f1 = 1
+        f2 = 2
+        for i in range(3, n + 1):
+            f1, f2= f2, f1 + f2
+
+        return f2
